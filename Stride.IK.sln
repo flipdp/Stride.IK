@@ -1,0 +1,11 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 16
+VisualStudioVersion = 16.0.0.0
+MinimumVisualStudioVersion = 16.0.0.0
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stride.IK.Windows", "Stride.IK.Windows\Stride.IK.Windows.csproj", "{E1A78F0B-C2C9-49C5-A2FF-A50BE7FB5913}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stride.IK", "Stride.IK\Stride.IK.csproj", "{FCBA7FDD-7F57-4D2D-B868-A52953D70233}"
+EndProject
+Global
+EndGlobal

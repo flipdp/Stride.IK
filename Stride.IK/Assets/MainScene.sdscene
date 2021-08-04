@@ -1,0 +1,163 @@
+!SceneAsset
+Id: 7e930848-de89-4186-858f-cdee8ad3c1ab
+SerializedVersion: {Stride: 3.1.0.1}
+Tags: []
+ChildrenIds: []
+Offset: {X: 0.0, Y: 0.0, Z: 0.0}
+Hierarchy:
+    RootParts:
+        - ref!! 139915a6-1666-4870-865f-c8ff4087e998
+        - ref!! b7f7d9bc-74ce-42e4-b766-338c793d1e81
+        - ref!! 1d7d1151-7b3c-4785-aa4a-0e3739dabe77
+        - ref!! a39c6832-9eb0-4eb5-acf1-26ca06019d6a
+        - ref!! c7add20f-c769-4261-8d86-35b49967e752
+        - ref!! 1143c4e9-ac2e-4884-95be-92e918e2e754
+        - ref!! a382a06e-1fe6-4ac9-8b1f-e21f759bb93d
+    Parts:
+        -   Entity:
+                Id: 1143c4e9-ac2e-4884-95be-92e918e2e754
+                Name: LeftHandTarget
+                Components:
+                    67f50eddf51f52a23e19453809b5d95e: !TransformComponent
+                        Id: b8481496-6fb1-499e-ac26-e43d644e811a
+                        Position: {X: 0.25, Y: 1.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: -0.70710677, Z: 0.0, W: 0.70710677}
+                        Scale: {X: 0.25, Y: 0.25, Z: 0.25}
+                        Children: {}
+                    ed0b9586f9602820aad4bdb3f276b67d: !ModelComponent
+                        Id: 7b9c4a05-00f7-4e7c-8109-a99e8bdfbb27
+                        Model: 2425df37-2de5-41ea-8f19-a212ff523735:Sphere
+                        Materials: {}
+                    d13437d219e56bac3a8e92e216148c82: !Stride.IK.Testing.TargetMover,Stride.IK
+                        Id: 4ee2119a-661a-4095-9534-6db183cc4b84
+                        KeyboardMovementSpeed: {X: 5.0, Y: 5.0, Z: 5.0}
+                        SpeedFactor: 5.0
+                        KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
+                        MouseRotationSpeed: {X: 1.0, Y: 1.0}
+        -   Entity:
+                Id: 139915a6-1666-4870-865f-c8ff4087e998
+                Name: Camera
+                Components:
+                    3a70ebed6febb9236045206356c2f004: !TransformComponent
+                        Id: 7a054f23-10ce-4d68-a21d-5a0895996183
+                        Position: {X: 2.6, Y: 0.6, Z: -1.0}
+                        Rotation: {X: 0.0, Y: 0.82903755, Z: 0.0, W: 0.5591929}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    0867969b26e99aa4341e385867fb7a54: !CameraComponent
+                        Id: 0138085e-a6f1-43cc-86ff-8d8e45b629b0
+                        Name: null
+                        Projection: Perspective
+                        Slot: d9f48252-e326-4183-9043-53473b5eab66
+                    e0c888fc050a75d676f9e0fd99c70fcb: !Stride.IK.Testing.CameraController,Stride.IK
+                        Id: e382a068-5038-41ed-a777-b37a41d823ca
+                        Gamepad: false
+                        KeyboardMovementSpeed: {X: 5.0, Y: 5.0, Z: 5.0}
+                        TouchMovementSpeed: {X: 0.7, Y: 0.7, Z: 0.3}
+                        SpeedFactor: 5.0
+                        KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
+                        MouseRotationSpeed: {X: 1.0, Y: 1.0}
+                        TouchRotationSpeed: {X: 1.0, Y: 0.7}
+        -   Entity:
+                Id: 1d7d1151-7b3c-4785-aa4a-0e3739dabe77
+                Name: Skybox
+                Components:
+                    c940c2621b9f54aec125a9613474d6a1: !TransformComponent
+                        Id: 25658d72-1259-42e3-8319-8951243626a3
+                        Position: {X: 0.0, Y: 2.0, Z: -2.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    ed75d6c611658fb75c2947b539ec5f12: !BackgroundComponent
+                        Id: 6a8a424f-02e0-481c-b4ff-652c21ec3785
+                        Texture: f3b8d7a0-8f04-49dd-afdc-25846351a5b9:Skybox texture
+                    cf2d13d1b37ed08d0f1e70c7434ecc0e: !LightComponent
+                        Id: 1cfaacef-a1c8-4d36-8d74-79fcc8019111
+                        Type: !LightSkybox
+                            Skybox: 74ab5c1e-a19a-4330-ba83-abab873afc62:Skybox
+        -   Folder: null
+            Entity:
+                Id: a382a06e-1fe6-4ac9-8b1f-e21f759bb93d
+                Name: RightHandTarget
+                Components:
+                    67f50eddf51f52a23e19453809b5d95e: !TransformComponent
+                        Id: 5c5c2fd5-01a6-4f6a-af57-58f3acaaa3af
+                        Position: {X: -0.25, Y: 1.0, Z: 0.0}
+                        Rotation: {X: -0.0, Y: -0.70710677, Z: 0.0, W: 0.70710677}
+                        Scale: {X: 0.25, Y: 0.25, Z: 0.25}
+                        Children: {}
+                    ed0b9586f9602820aad4bdb3f276b67d: !ModelComponent
+                        Id: 424d5295-75d3-42f1-a331-05a81f7dd89f
+                        Model: 2425df37-2de5-41ea-8f19-a212ff523735:Sphere
+                        Materials: {}
+                    92c838e07784a289f11145c7a1c9677d: !Stride.IK.Testing.TargetMover,Stride.IK
+                        Id: ae6418ac-acc0-4bb4-bdd1-00e11ce33b37
+                        KeyboardMovementSpeed: {X: 5.0, Y: 5.0, Z: 5.0}
+                        SpeedFactor: 5.0
+                        KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
+                        MouseRotationSpeed: {X: 1.0, Y: 1.0}
+        -   Entity:
+                Id: a39c6832-9eb0-4eb5-acf1-26ca06019d6a
+                Name: Ground
+                Components:
+                    031bcac4a409136b7cf8eafa147cdb76: !TransformComponent
+                        Id: ea6dd4cb-fba0-44b3-bd9f-2c2b09b5ec17
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    02d0baf36f283bdac1f6fe3df23d5047: !ModelComponent
+                        Id: a341e8bc-580e-420b-b4db-77fc9310fb7a
+                        Model: eaec75e5-6d18-4fde-b629-15791587dbea:Ground
+                        Materials: {}
+        -   Entity:
+                Id: b7f7d9bc-74ce-42e4-b766-338c793d1e81
+                Name: Directional light
+                Components:
+                    24bb73e33e62830c4cab2cf42a08c78a: !TransformComponent
+                        Id: 7141a19e-e88e-459a-84d0-e353579bf05e
+                        Position: {X: 0.0, Y: 2.0, Z: 0.0}
+                        Rotation: {X: 1.131334E-08, Y: -0.9659258, Z: -0.25881904, W: -4.222196E-08}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    bc6196e01fc85e0d23223e806e38814f: !LightComponent
+                        Id: 2566f397-8ac0-4dd6-bcaa-acdf91f349f8
+                        Type: !LightDirectional
+                            Color: !ColorRgbProvider
+                                Value: {R: 1.0, G: 1.0, B: 1.0}
+                            Shadow:
+                                Enabled: true
+                                Filter: !LightShadowMapFilterTypePcf
+                                    FilterSize: Filter5x5
+                                Size: Large
+                                DepthRange: {}
+                                PartitionMode: !LightDirectionalShadowMap.PartitionLogarithmic {}
+                                ComputeTransmittance: false
+                                BiasParameters: {}
+                        Intensity: 20.0
+        -   Entity:
+                Id: c7add20f-c769-4261-8d86-35b49967e752
+                Name: mannequinModel
+                Components:
+                    9d3a0dea1bafb1fff7bc610f797d7aed: !TransformComponent
+                        Id: eb1411aa-92f2-4753-8d7a-9ab0fd727b4e
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    8a53eb4a5168ef47abef98755ccb209e: !ModelComponent
+                        Id: 711236ca-2c12-44cf-938d-fb94f64a545c
+                        Model: f68ea240-695a-4de5-9884-60d77544fcd6:Models/mannequinModel
+                        Materials: {}
+                    8fbbb80361d551a6708d12e6c53ff251: !IKComponent
+                        Id: 8da0c322-bb66-488f-877c-570e3f22eac7
+                        Number of iteration: 2
+                        BoneToTarget:
+                            719657a08cc9e3763ca573131f9bb276:
+                                Length: 2
+                                Root: CATRigLArmPalm
+                                Target: ref!! 1143c4e9-ac2e-4884-95be-92e918e2e754
+                            708b0396b9f8e3574100bfeaa0734903:
+                                Length: 2
+                                Root: CATRigRArmPalm
+                                Target: ref!! a382a06e-1fe6-4ac9-8b1f-e21f759bb93d
