@@ -2,7 +2,6 @@
 using Stride.Engine;
 using Stride.Games;
 using Stride.Rendering;
-using Stride.Core.Mathematics;
 using System;
 
 namespace Stride.IK
@@ -21,9 +20,7 @@ namespace Stride.IK
                 {
                     var s = c.Key.Entity.Get<ModelComponent>().Skeleton;
                     var x = c.Key.Entity.EntityManager.Processors;
-                    c.Key.ComputeFabrik(context.Time);
-                    //s.NodeTransformations[21].Transform.Rotation *= Quaternion.RotationY(30 * (float)context.Time.Elapsed.TotalSeconds);
-                    // s.NodeTransformations[21].Transform.Position.Y += 5;
+                    c.Key.ComputeIK(context.Time);
 
                 } catch (Exception)
                 {
@@ -32,7 +29,17 @@ namespace Stride.IK
             }
         }
 
-        
+        protected override void OnEntityComponentAdding(Entity entity, [NotNull] IKComponent component, [NotNull] IKComponent data)
+        {
+            component.BuildGraph();
+            base.OnEntityComponentAdding(entity, component, data);
+        }
+        protected override bool IsAssociatedDataValid(Entity entity, IKComponent component, IKComponent associatedData)
+        {
+            return component.CheckValid();
+        }
+
+
         public override void Update(GameTime time)
         {
             base.Update(time);
@@ -41,17 +48,6 @@ namespace Stride.IK
         protected override IKComponent GenerateComponentData(Entity entity, IKComponent component)
         {
             return base.GenerateComponentData(entity, component);
-        }
-
-        protected override bool IsAssociatedDataValid(Entity entity, IKComponent component, IKComponent associatedData)
-        {
-            return component.CheckValid();
-        }
-
-        protected override void OnEntityComponentAdding(Entity entity, [NotNull] IKComponent component, [NotNull] IKComponent data)
-        {
-            component.BuildGraph();
-            base.OnEntityComponentAdding(entity, component, data);
         }
 
         protected override void OnEntityComponentRemoved(Entity entity, [NotNull] IKComponent component, [NotNull] IKComponent data)

@@ -20,7 +20,7 @@ Hierarchy:
                 Components:
                     67f50eddf51f52a23e19453809b5d95e: !TransformComponent
                         Id: b8481496-6fb1-499e-ac26-e43d644e811a
-                        Position: {X: 0.25, Y: 1.0, Z: 0.0}
+                        Position: {X: 0.51693916, Y: 1.0, Z: 0.0}
                         Rotation: {X: 0.0, Y: -0.70710677, Z: 0.0, W: 0.70710677}
                         Scale: {X: 0.25, Y: 0.25, Z: 0.25}
                         Children: {}
@@ -31,7 +31,7 @@ Hierarchy:
                     d13437d219e56bac3a8e92e216148c82: !Stride.IK.Testing.TargetMover,Stride.IK
                         Id: 4ee2119a-661a-4095-9534-6db183cc4b84
                         KeyboardMovementSpeed: {X: 5.0, Y: 5.0, Z: 5.0}
-                        SpeedFactor: 5.0
+                        SpeedFactor: 1.0
                         KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
                         MouseRotationSpeed: {X: 1.0, Y: 1.0}
         -   Entity:
@@ -82,7 +82,7 @@ Hierarchy:
                 Components:
                     67f50eddf51f52a23e19453809b5d95e: !TransformComponent
                         Id: 5c5c2fd5-01a6-4f6a-af57-58f3acaaa3af
-                        Position: {X: -0.25, Y: 1.0, Z: 0.0}
+                        Position: {X: 1.0, Y: 1.5, Z: 0.0}
                         Rotation: {X: -0.0, Y: -0.70710677, Z: 0.0, W: 0.70710677}
                         Scale: {X: 0.25, Y: 0.25, Z: 0.25}
                         Children: {}
@@ -90,12 +90,6 @@ Hierarchy:
                         Id: 424d5295-75d3-42f1-a331-05a81f7dd89f
                         Model: 2425df37-2de5-41ea-8f19-a212ff523735:Sphere
                         Materials: {}
-                    92c838e07784a289f11145c7a1c9677d: !Stride.IK.Testing.TargetMover,Stride.IK
-                        Id: ae6418ac-acc0-4bb4-bdd1-00e11ce33b37
-                        KeyboardMovementSpeed: {X: 5.0, Y: 5.0, Z: 5.0}
-                        SpeedFactor: 5.0
-                        KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
-                        MouseRotationSpeed: {X: 1.0, Y: 1.0}
         -   Entity:
                 Id: a39c6832-9eb0-4eb5-acf1-26ca06019d6a
                 Name: Ground
@@ -149,15 +143,12 @@ Hierarchy:
                         Id: 711236ca-2c12-44cf-938d-fb94f64a545c
                         Model: f68ea240-695a-4de5-9884-60d77544fcd6:Models/mannequinModel
                         Materials: {}
-                    8fbbb80361d551a6708d12e6c53ff251: !IKComponent
-                        Id: 8da0c322-bb66-488f-877c-570e3f22eac7
+                    273888ffdfddf48e6d165063e96a945e: !IKComponent
+                        Id: 5c9d0541-d3e5-4a4e-a6fe-4c89943d86ff
                         Number of iteration: 2
                         BoneToTarget:
-                            719657a08cc9e3763ca573131f9bb276:
+                            6d854d75f4720fde1714fcfdc50adc27:
                                 Length: 2
                                 Root: CATRigLArmPalm
                                 Target: ref!! 1143c4e9-ac2e-4884-95be-92e918e2e754
-                            708b0396b9f8e3574100bfeaa0734903:
-                                Length: 2
-                                Root: CATRigRArmPalm
-                                Target: ref!! a382a06e-1fe6-4ac9-8b1f-e21f759bb93d
+                                Pole: ref!! a382a06e-1fe6-4ac9-8b1f-e21f759bb93d
