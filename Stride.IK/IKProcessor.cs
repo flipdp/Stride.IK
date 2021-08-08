@@ -19,7 +19,7 @@ namespace Stride.IK
                 try
                 {
                     var s = c.Key.Entity.Get<ModelComponent>().Skeleton;
-                    var x = c.Key.Entity.EntityManager.Processors;
+                    //var x = c.Key.Entity.EntityManager.Processors;
                     c.Key.ComputeIK(context.Time);
 
                 } catch (Exception)

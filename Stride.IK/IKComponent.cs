@@ -86,7 +86,6 @@ namespace Stride.IK
             public int Index { get; set; }
             public string Name { get; set; }
             public int Parent { get; set; }
-            //public int Child { get; set; }
             public float Distance
             {
                 get { return distance; }
@@ -107,13 +106,9 @@ namespace Stride.IK
             public void Compute()
             {
                 if(Vector3.DistanceSquared(Target.Transform.WorldMatrix.TranslationVector, Chain.Last().Position) >= FullDistance*FullDistance)
-                {
                     Stretch();
-                }
                 else
-                {
                     Bend();
-                }
 
                 if (Pole != null)
                 {
@@ -125,10 +120,7 @@ namespace Stride.IK
 
                         var angle = MathF.Acos(Vector3.Dot(Vector3.Normalize(projectBone - Chain[i+1].Position), Vector3.Normalize(projectPole - Chain[i+1].Position)));
                         var cross = Vector3.Cross(projectBone - Chain[i + 1].Position, projectPole - Chain[i + 1].Position);
-                        angle = angle * MathF.Sign(Vector3.Dot(p.Normal, cross));
-                        //var newPos = Chain[i].Position - Chain[i + 1].Position;
-                        //Quaternion.RotationAxis(p.Normal, angle).Rotate(ref newPos);
-                        //Chain[i].Position = newPos + Chain[i+1].Position;
+                        angle *= MathF.Sign(Vector3.Dot(p.Normal, cross));
                         Chain[i].Position = QTimesV(Quaternion.RotationAxis(p.Normal, angle), Chain[i].Position - Chain[i + 1].Position) + Chain[i + 1].Position;
                     }
                 }
