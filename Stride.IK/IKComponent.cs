@@ -45,32 +45,29 @@ namespace Stride.IK
                 ikChains.Add(new IKChain { Target = e, Chain = ikBones, MaxIterations = NbIteration, FullDistance = fullDist, Pole = pole });
             }
         }
+
+        Vector3 _scale = Vector3.One;
+        Quaternion _boneRot;
         public void ComputeIK(GameTime time)
         {
             foreach (var chain in ikChains)
             {
                 chain.Compute();
 
-                Vector3 targetPos;
-                Quaternion targetRot;
-                Vector3 targetScale;
-                chain.Target.Transform.GetWorldTransformation(out targetPos, out targetRot, out targetScale);
+                chain.Target.Transform.GetWorldTransformation(out _, out Quaternion targetRot, out _);
 
-                Matrix m;
-                Vector3 s = Vector3.One;
-                Quaternion q;
                 for (int i = chain.Chain.Count - 1; i >= 0; i--)
                 {
                     var link = chain.Chain[i];
                     if (i == 0)
-                        q = targetRot;
+                        _boneRot = targetRot;
                     else
                     {
                         var v = Quaternion.RotationMatrix(Matrix.LookAtRH(link.Position, chain.Chain[i - 1].Position, Vector3.UnitY));
                         v.Invert();
-                        q = Quaternion.RotationYawPitchRoll(MathF.PI * 0.5f, 0f, 0f) * v;
+                        _boneRot = Quaternion.RotationYawPitchRoll(MathF.PI * 0.5f, 0f, 0f) * v;
                     }
-                    Matrix.Transformation(ref s, ref q, ref link.Position, out m);
+                    Matrix.Transformation(ref _scale, ref _boneRot, ref link.Position, out Matrix m);
                     skeleton.NodeTransformations[link.Index].WorldMatrix = m;
                 }
             }
@@ -103,74 +100,71 @@ namespace Stride.IK
             public float FullDistance;
             public uint MaxIterations;
 
+            private Vector3 dir;
+
             public void Compute()
             {
-                if(Vector3.DistanceSquared(Target.Transform.WorldMatrix.TranslationVector, Chain.Last().Position) >= FullDistance*FullDistance)
+                if (Vector3.DistanceSquared(Target.Transform.WorldMatrix.TranslationVector, Chain.Last().Position) >= FullDistance * FullDistance)
                     Stretch();
                 else
                     Bend();
 
                 if (Pole != null)
-                {
-                    for (int i = Chain.Count - 2; i > 0; i--)
-                    {
-                        var p = new Plane(Chain[i+1].Position, Chain[i-1].Position - Chain[i+1].Position);
-                        var projectPole = Plane.Project(p, Pole.Transform.WorldMatrix.TranslationVector);
-                        var projectBone = Plane.Project(p, Chain[i].Position);
-
-                        var angle = MathF.Acos(Vector3.Dot(Vector3.Normalize(projectBone - Chain[i+1].Position), Vector3.Normalize(projectPole - Chain[i+1].Position)));
-                        var cross = Vector3.Cross(projectBone - Chain[i + 1].Position, projectPole - Chain[i + 1].Position);
-                        angle *= MathF.Sign(Vector3.Dot(p.Normal, cross));
-                        Chain[i].Position = QTimesV(Quaternion.RotationAxis(p.Normal, angle), Chain[i].Position - Chain[i + 1].Position) + Chain[i + 1].Position;
-                    }
-                }
+                    ConstrainPole();
             }
             private void Stretch()
             {
-                Vector3 dir = Vector3.Normalize(Target.Transform.WorldMatrix.TranslationVector - Chain.Last().Position);
+                dir = Vector3.Normalize(Target.Transform.WorldMatrix.TranslationVector - Chain.Last().Position);
                 for (int i = Chain.Count - 2; i >= 0; i--)
                     Chain[i].Position = Chain[i + 1].Position + dir * Chain[i].Distance;
             }
-            
+
             private void Bend()
             {
                 for (uint r = 0; r < MaxIterations; r++)
                 {
                     //backwards
-                    for (int i = 0; i < Chain.Count-1; i++)
+                    for (int i = 0; i < Chain.Count - 1; i++)
                     {
                         if (i == 0)
                             Chain[i].Position = Target.Transform.WorldMatrix.TranslationVector;
                         else
-                            Chain[i].Position = Chain[i - 1].Position + Vector3.Normalize(Chain[i].Position - Chain[i - 1].Position) * Chain[i-1].Distance;
+                            Chain[i].Position = Chain[i - 1].Position + Vector3.Normalize(Chain[i].Position - Chain[i - 1].Position) * Chain[i - 1].Distance;
                     }
                     //forward
-                    for (int i = Chain.Count-2; i >= 0; i--)
-                        Chain[i].Position = Chain[i + 1].Position + Vector3.Normalize(Chain[i].Position - Chain[i+1].Position) * Chain[i].Distance;
-                
+                    for (int i = Chain.Count - 2; i >= 0; i--)
+                        Chain[i].Position = Chain[i + 1].Position + Vector3.Normalize(Chain[i].Position - Chain[i + 1].Position) * Chain[i].Distance;
+
                     //break if close enough?
+                    //Probably too expensive for two iterations
                 }
             }
 
-            private Vector3 QTimesV(Quaternion rotation, Vector3 point)
+            private void ConstrainPole()
             {
-                Vector3 vector;
-                float num = rotation.X * 2f;
-                float num2 = rotation.Y * 2f;
-                float num3 = rotation.Z * 2f;
-                float num4 = rotation.X * num;
-                float num5 = rotation.Y * num2;
-                float num6 = rotation.Z * num3;
-                float num7 = rotation.X * num2;
-                float num8 = rotation.X * num3;
-                float num9 = rotation.Y * num3;
-                float num10 = rotation.W * num;
-                float num11 = rotation.W * num2;
-                float num12 = rotation.W * num3;
-                vector.X = (((1f - (num5 + num6)) * point.X) + ((num7 - num12) * point.Y)) + ((num8 + num11) * point.Z);
-                vector.Y = (((num7 + num12) * point.X) + ((1f - (num4 + num6)) * point.Y)) + ((num9 - num10) * point.Z);
-                vector.Z = (((num8 - num11) * point.X) + ((num9 + num10) * point.Y)) + ((1f - (num4 + num5)) * point.Z);
-                return vector;
+                var polePos = Pole.Transform.WorldMatrix.TranslationVector;
+                for (int i = Chain.Count - 2; i > 0; i--)
+                {
+                    var sphere1 = (Chain[i + 1].Position, Chain[i].Distance);
+                    var sphere2 = (Chain[i - 1].Position, Chain[i - 1].Distance);
+                    var intersection = SphereSphereIntersection(sphere1, sphere2);
+
+                    var poleDir = Vector3.Normalize(Chain[i + 1].Position - polePos);
+                    // Garbage to make orthogonal
+                    var upDir = Vector3.Normalize(Vector3.Cross(intersection.normal, poleDir));
+                    var bendDir = Vector3.Normalize(Vector3.Cross(intersection.normal, upDir));
+                    Chain[i].Position = intersection.center + bendDir * intersection.radius;
+                }
+            }
+
+            private (Vector3 center, Vector3 normal, float radius) SphereSphereIntersection(in (Vector3 position, float radius) sphere1, in (Vector3 position, float radius) sphere2)
+            {
+                float d = Vector3.Distance(sphere1.position, sphere2.position);
+                float x = (d * d + sphere1.radius * sphere1.radius - sphere2.radius * sphere2.radius) * (d == 0f ? 0f : 1f / (2f * d));
+                Vector3 normal = Vector3.Normalize(sphere2.position - sphere1.position);
+                return (center: sphere1.position + normal * x,
+                    normal: normal,
+                    radius: MathF.Sqrt(MathF.Abs(sphere1.radius * sphere1.radius - x * x)));
             }
         }
 

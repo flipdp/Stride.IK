@@ -12,6 +12,8 @@ Hierarchy:
         - ref!! a39c6832-9eb0-4eb5-acf1-26ca06019d6a
         - ref!! c7add20f-c769-4261-8d86-35b49967e752
         - ref!! da400342-21a5-4bb2-bff2-8711972423bd
+        - ref!! 6fe8328d-9e2b-4b9a-9858-ea455c2a7ff8
+        - ref!! f6dbc5a1-91de-421e-9b48-3b3fb9dedc23
         - ref!! 84d25620-0d54-4405-b046-a534c0ee1296
     Parts:
         -   Entity:
@@ -29,8 +31,8 @@ Hierarchy:
                         Name: null
                         Projection: Perspective
                         Slot: d9f48252-e326-4183-9043-53473b5eab66
-                    e0c888fc050a75d676f9e0fd99c70fcb: !Stride.IK.Testing.CameraController,Stride.IK
-                        Id: e382a068-5038-41ed-a777-b37a41d823ca
+                    3cdcd1615d1d6b4d6e1186b451f50bcd: !Stride.IK.Testing.CameraController,Stride.IK
+                        Id: fa62cccf-de97-4c00-92d2-07201abc8276
                         Gamepad: false
                         KeyboardMovementSpeed: {X: 5.0, Y: 5.0, Z: 5.0}
                         TouchMovementSpeed: {X: 0.7, Y: 0.7, Z: 0.3}
@@ -57,13 +59,29 @@ Hierarchy:
                             Skybox: 74ab5c1e-a19a-4330-ba83-abab873afc62:Skybox
         -   Folder: null
             Entity:
+                Id: 6fe8328d-9e2b-4b9a-9858-ea455c2a7ff8
+                Name: rightLegTarget
+                Components:
+                    ace2929231f62330e3ee71817b4b1ec3: !TransformComponent
+                        Id: 4da1af11-eda3-4b56-80f9-9934b4b0ca34
+                        Position: {X: -0.17103316, Y: 0.4217434, Z: 0.34474945}
+                        Rotation: {X: 0.60414076, Y: -0.36744237, Z: -0.60414076, W: 0.36744243}
+                        Scale: {X: 0.1, Y: 0.1, Z: 0.1}
+                        Children: {}
+                    2330ed4f164ebd549a976e224ca7931d: !ModelComponent
+                        Id: b255eeab-4541-4a26-97af-a3bc09596e01
+                        Model: 2425df37-2de5-41ea-8f19-a212ff523735:Sphere
+                        Materials:
+                            d1aa5deba9a2b443b61a586e8d409cb1~0: e75029ea-15c8-48c0-b055-e7cbd90fa5ea:Sphere Material
+        -   Folder: null
+            Entity:
                 Id: 84d25620-0d54-4405-b046-a534c0ee1296
                 Name: leftArmTarget
                 Components:
                     ace2929231f62330e3ee71817b4b1ec3: !TransformComponent
                         Id: 05357722-3df8-4136-855c-b7392523fc91
                         Position: {X: 0.43673077, Y: 1.6345066, Z: 0.2007063}
-                        Rotation: {X: 0.49084762, Y: 0.0, Z: 0.0, W: 0.87124544}
+                        Rotation: {X: -0.41941985, Y: -0.5692864, Z: 0.5692864, W: 0.41941985}
                         Scale: {X: 0.1, Y: 0.1, Z: 0.1}
                         Children: {}
                     2330ed4f164ebd549a976e224ca7931d: !ModelComponent
@@ -72,7 +90,7 @@ Hierarchy:
                         Materials: {}
                     c53d56e56eb3a6f0da2f1cf71c7495ab: !Stride.IK.Testing.TargetMover,Stride.IK
                         Id: e87e1b53-5138-43da-87af-e381203d5ef3
-                        KeyboardMovementSpeed: {X: 5.0, Y: 5.0, Z: 5.0}
+                        KeyboardMovementSpeed: {X: 1.0, Y: 1.0, Z: 1.0}
                         SpeedFactor: 5.0
                         KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
                         MouseRotationSpeed: {X: 1.0, Y: 1.0}
@@ -138,6 +156,11 @@ Hierarchy:
                                 Root: CATRigLArmPalm
                                 Target: ref!! 84d25620-0d54-4405-b046-a534c0ee1296
                                 Pole: ref!! da400342-21a5-4bb2-bff2-8711972423bd
+                            a999dcaf47e71d1da899f37849cf644b:
+                                Length: 2
+                                Root: CATRigRLegAnkle
+                                Target: ref!! 6fe8328d-9e2b-4b9a-9858-ea455c2a7ff8
+                                Pole: ref!! f6dbc5a1-91de-421e-9b48-3b3fb9dedc23
         -   Folder: null
             Entity:
                 Id: da400342-21a5-4bb2-bff2-8711972423bd
@@ -151,5 +174,20 @@ Hierarchy:
                         Children: {}
                     2330ed4f164ebd549a976e224ca7931d: !ModelComponent
                         Id: bed3358a-40ad-4d25-83a1-004242df9eec
+                        Model: 2425df37-2de5-41ea-8f19-a212ff523735:Sphere
+                        Materials: {}
+        -   Folder: null
+            Entity:
+                Id: f6dbc5a1-91de-421e-9b48-3b3fb9dedc23
+                Name: rightLegHint
+                Components:
+                    ace2929231f62330e3ee71817b4b1ec3: !TransformComponent
+                        Id: 773747a6-9143-4752-8927-d9421f7ca20d
+                        Position: {X: -0.17103316, Y: 1.0989457, Z: 0.6877358}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 0.1, Y: 0.1, Z: 0.1}
+                        Children: {}
+                    2330ed4f164ebd549a976e224ca7931d: !ModelComponent
+                        Id: 7d1a423d-a0f2-4799-9e2b-f8af64844e0a
                         Model: 2425df37-2de5-41ea-8f19-a212ff523735:Sphere
                         Materials: {}
