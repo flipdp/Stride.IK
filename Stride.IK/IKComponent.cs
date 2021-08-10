@@ -7,48 +7,49 @@ using System.Collections.Generic;
 using Stride.Core.Mathematics;
 using Stride.Games;
 using System;
+using Stride.Physics;
 
 namespace Stride.IK
 {
     [DataContract("IKComponent")]
     [DefaultEntityComponentProcessor(typeof(IKProcessor), ExecutionMode = ExecutionMode.Runtime | ExecutionMode.Thumbnail | ExecutionMode.Preview)]
     [ComponentOrder(2005)]
-    [Display("FABRIK", Expand = ExpandRule.Once)]
-    [ComponentCategory("IK")]
+    //[Display("FABRIK", Expand = ExpandRule.Once)]
+    //[ComponentCategory("IK")]
     public class IKComponent : EntityComponent
     {
         [DataMember("Number of iteration")]
         public uint NbIteration;
 
-        public List<IKSelector> BoneToTarget = new();
-
         private List<IKChain> ikChains = new();
         protected SkeletonUpdater skeleton;
+        protected List<NodeData> boneNodes;
         public virtual void BuildGraph()
         {
             skeleton = Entity.Get<ModelComponent>().Skeleton;
             skeleton.UpdateMatrices();
-            var nodes = skeleton.Nodes.Select((x, i) => new NodeData { Index = i, Name = x.Name, Parent = x.ParentIndex, Position = skeleton.NodeTransformations[i].WorldMatrix.TranslationVector }).ToList();
-            foreach (var (n, root, e, pole) in BoneToTarget.Select(x => (x.Length, x.Root, x.Target, x.Pole)))
-            {
-                List<NodeData> ikBones = new();
-                NodeData data = nodes.Where(x => x.Name == root).FirstOrDefault();
-                float fullDist = 0f;
-                for (int i = 0; i <= n; i++)
-                {
-                    skeleton.NodeTransformations[data.Index].Flags = ModelNodeFlags.EnableRender | ModelNodeFlags.OverrideWorldMatrix;
-                    data.Distance = Vector3.Distance(data.Position, nodes[data.Parent].Position);
-                    fullDist += data.Distance;
-                    ikBones.Add(data);
-                    data = nodes[data.Parent];
-                }
-                ikChains.Add(new IKChain { Target = e, Chain = ikBones, MaxIterations = NbIteration, FullDistance = fullDist, Pole = pole });
-            }
+            boneNodes = skeleton.Nodes.Select((x, i) => new NodeData { Index = i, Name = x.Name, Parent = x.ParentIndex, Position = skeleton.NodeTransformations[i].WorldMatrix.TranslationVector }).ToList();
         }
 
-        Vector3 _scale = Vector3.One;
+        protected void AddChain(int n, string root, Entity e, Entity pole)
+        {
+            List<NodeData> ikBones = new();
+            NodeData data = boneNodes.Where(x => x.Name == root).FirstOrDefault();
+            float fullDist = 0f;
+            for (int i = 0; i <= n; i++)
+            {
+                skeleton.NodeTransformations[data.Index].Flags = ModelNodeFlags.EnableRender | ModelNodeFlags.OverrideWorldMatrix;
+                data.Distance = Vector3.Distance(data.Position, boneNodes[data.Parent].Position);
+                fullDist += data.Distance;
+                ikBones.Add(data);
+                data = boneNodes[data.Parent];
+            }
+            ikChains.Add(new IKChain { Target = e, Chain = ikBones, MaxIterations = NbIteration, FullDistance = fullDist, Pole = pole });
+        }
+
+        protected Vector3 _scale = Vector3.One;
         Quaternion _boneRot;
-        public void ComputeIK(GameTime time)
+        public virtual void ComputeIK(GameTime time, PhysicsProcessor physics)
         {
             foreach (var chain in ikChains)
             {
@@ -72,13 +73,13 @@ namespace Stride.IK
                 }
             }
         }
-        public bool CheckValid()
+        public virtual bool CheckValid()
         {
             var mc = Entity.Get<ModelComponent>();
             return mc != null && mc.Skeleton != null;
         }
 
-        internal class NodeData
+        public class NodeData
         {
             public int Index { get; set; }
             public string Name { get; set; }
@@ -166,15 +167,6 @@ namespace Stride.IK
                     normal: normal,
                     radius: MathF.Sqrt(MathF.Abs(sphere1.radius * sphere1.radius - x * x)));
             }
-        }
-
-        [DataContract]
-        public class IKSelector
-        {
-            public int Length;
-            public string Root;
-            public Entity Target;
-            public Entity Pole;
         }
     }
 }

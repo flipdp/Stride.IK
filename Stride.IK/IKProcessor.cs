@@ -1,6 +1,7 @@
 ﻿using Stride.Core.Annotations;
 using Stride.Engine;
 using Stride.Games;
+using Stride.Physics;
 using Stride.Rendering;
 using System;
 
@@ -14,13 +15,14 @@ namespace Stride.IK
         }
         public override void Draw(RenderContext context)
         {
-            foreach(var c in ComponentDatas)
+            PhysicsProcessor physics = EntityManager.GetProcessor<PhysicsProcessor>();
+            foreach (var c in ComponentDatas)
             {
                 try
                 {
                     var s = c.Key.Entity.Get<ModelComponent>().Skeleton;
                     //var x = c.Key.Entity.EntityManager.Processors;
-                    c.Key.ComputeIK(context.Time);
+                    c.Key.ComputeIK(context.Time, physics);
 
                 } catch (Exception)
                 {

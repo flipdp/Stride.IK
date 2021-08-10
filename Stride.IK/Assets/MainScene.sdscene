@@ -11,10 +11,9 @@ Hierarchy:
         - ref!! 1d7d1151-7b3c-4785-aa4a-0e3739dabe77
         - ref!! a39c6832-9eb0-4eb5-acf1-26ca06019d6a
         - ref!! c7add20f-c769-4261-8d86-35b49967e752
-        - ref!! da400342-21a5-4bb2-bff2-8711972423bd
-        - ref!! 6fe8328d-9e2b-4b9a-9858-ea455c2a7ff8
         - ref!! f6dbc5a1-91de-421e-9b48-3b3fb9dedc23
-        - ref!! 84d25620-0d54-4405-b046-a534c0ee1296
+        - ref!! 989fb5ae-4891-45d9-b2b2-2b1eba83a005
+        - ref!! 72f56e0e-3ce4-4cba-acec-66a1d58dba03
     Parts:
         -   Entity:
                 Id: 139915a6-1666-4870-865f-c8ff4087e998
@@ -57,43 +56,51 @@ Hierarchy:
                         Id: 1cfaacef-a1c8-4d36-8d74-79fcc8019111
                         Type: !LightSkybox
                             Skybox: 74ab5c1e-a19a-4330-ba83-abab873afc62:Skybox
+        -   Entity:
+                Id: 72f56e0e-3ce4-4cba-acec-66a1d58dba03
+                Name: Cube
+                Components:
+                    a62ac650b40e83b0799f6d94c3a8a53d: !TransformComponent
+                        Id: 074db9e0-e1b1-4fe8-a4b6-783f77af4fb9
+                        Position: {X: 0.6782085, Y: 0.0896987, Z: -0.095675945}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.21692352, W: 0.9761886}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    ff275e50a86a541da8c24bd351be6047: !ModelComponent
+                        Id: c1d9e31f-c646-489d-ba7a-8956e671ccec
+                        Model: 342248e6-b516-4571-bb1f-213588584c98:Cube
+                        Materials: {}
+                    02216252929496f38d041be8e0676031: !StaticColliderComponent
+                        Id: c3352062-21cc-4675-97de-6cafc2f4b4b2
+                        CanSleep: false
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        AlwaysUpdateNaviMeshCache: false
+                        ColliderShapes:
+                            a3462b9e0b5c0d33978dc2a32e68c9fb: !BoxColliderShapeDesc
+                                Is2D: false
+                                Size: {X: 1.0, Y: 1.0, Z: 1.0}
+                                LocalOffset: {X: 0.0, Y: 0.0, Z: 0.0}
+                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
         -   Folder: null
             Entity:
-                Id: 6fe8328d-9e2b-4b9a-9858-ea455c2a7ff8
-                Name: rightLegTarget
+                Id: 989fb5ae-4891-45d9-b2b2-2b1eba83a005
+                Name: leftLegHint
                 Components:
                     ace2929231f62330e3ee71817b4b1ec3: !TransformComponent
-                        Id: 4da1af11-eda3-4b56-80f9-9934b4b0ca34
-                        Position: {X: -0.17103316, Y: 0.4217434, Z: 0.34474945}
-                        Rotation: {X: 0.60414076, Y: -0.36744237, Z: -0.60414076, W: 0.36744243}
+                        Id: 7daad73f-8478-4ff8-b4e9-9f690fae0daf
+                        Position: {X: 0.2, Y: 1.0989457, Z: 0.6877358}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 0.1, Y: 0.1, Z: 0.1}
                         Children: {}
                     2330ed4f164ebd549a976e224ca7931d: !ModelComponent
-                        Id: b255eeab-4541-4a26-97af-a3bc09596e01
-                        Model: 2425df37-2de5-41ea-8f19-a212ff523735:Sphere
-                        Materials:
-                            d1aa5deba9a2b443b61a586e8d409cb1~0: e75029ea-15c8-48c0-b055-e7cbd90fa5ea:Sphere Material
-        -   Folder: null
-            Entity:
-                Id: 84d25620-0d54-4405-b046-a534c0ee1296
-                Name: leftArmTarget
-                Components:
-                    ace2929231f62330e3ee71817b4b1ec3: !TransformComponent
-                        Id: 05357722-3df8-4136-855c-b7392523fc91
-                        Position: {X: 0.43673077, Y: 1.6345066, Z: 0.2007063}
-                        Rotation: {X: -0.41941985, Y: -0.5692864, Z: 0.5692864, W: 0.41941985}
-                        Scale: {X: 0.1, Y: 0.1, Z: 0.1}
-                        Children: {}
-                    2330ed4f164ebd549a976e224ca7931d: !ModelComponent
-                        Id: 8fc13b27-889a-487f-9f46-99a4b975e0f5
+                        Id: 282dad07-de46-4121-8c71-70073bc3aa9a
                         Model: 2425df37-2de5-41ea-8f19-a212ff523735:Sphere
                         Materials: {}
-                    c53d56e56eb3a6f0da2f1cf71c7495ab: !Stride.IK.Testing.TargetMover,Stride.IK
-                        Id: e87e1b53-5138-43da-87af-e381203d5ef3
-                        KeyboardMovementSpeed: {X: 1.0, Y: 1.0, Z: 1.0}
-                        SpeedFactor: 5.0
-                        KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
-                        MouseRotationSpeed: {X: 1.0, Y: 1.0}
         -   Entity:
                 Id: a39c6832-9eb0-4eb5-acf1-26ca06019d6a
                 Name: Ground
@@ -108,6 +115,32 @@ Hierarchy:
                         Id: a341e8bc-580e-420b-b4db-77fc9310fb7a
                         Model: eaec75e5-6d18-4fde-b629-15791587dbea:Ground
                         Materials: {}
+                    bed2c8e7e5488a26d0d72a9ee00ab48b: !RigidbodyComponent
+                        Id: cd0d02a6-bf33-4043-a269-03b07d7696c6
+                        CanSleep: false
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        IsKinematic: true
+                        Mass: 1.0
+                        LinearDamping: 0.0
+                        AngularDamping: 0.0
+                        OverrideGravity: false
+                        Gravity: {X: 0.0, Y: 0.0, Z: 0.0}
+                        NodeName: null
+                        ColliderShapes:
+                            0fb1bb1ad69835185d62c702fc077a68: !StaticPlaneColliderShapeDesc
+                                Normal: {X: 0.0, Y: 1.0, Z: 0.0}
+                                Offset: 0.0
+                    3d051aab556303b76b89aa888aa55454: !Stride.IK.Testing.TargetMover,Stride.IK
+                        Id: 5e535fe1-aa10-4198-b5bd-0afbb94f4833
+                        KeyboardMovementSpeed: {X: 1.0, Y: 1.0, Z: 1.0}
+                        SpeedFactor: 5.0
+                        KeyboardRotationSpeed: {X: 1.0, Y: 1.0}
+                        MouseRotationSpeed: {X: 1.0, Y: 1.0}
         -   Entity:
                 Id: b7f7d9bc-74ce-42e4-b766-338c793d1e81
                 Name: Directional light
@@ -147,35 +180,16 @@ Hierarchy:
                         Id: 711236ca-2c12-44cf-938d-fb94f64a545c
                         Model: f68ea240-695a-4de5-9884-60d77544fcd6:Models/mannequinModel
                         Materials: {}
-                    273888ffdfddf48e6d165063e96a945e: !IKComponent
-                        Id: 5c9d0541-d3e5-4a4e-a6fe-4c89943d86ff
+                    6ba8951f9ad7ce5c60584d2dd71f6405: !Biped%252520Foot%252520Grounder
+                        Id: a4776e05-7192-4bc6-8c3e-ea7fc8c2007a
                         Number of iteration: 2
-                        BoneToTarget:
-                            99efd7763e859120824d9f1fdf7e5814:
-                                Length: 2
-                                Root: CATRigLArmPalm
-                                Target: ref!! 84d25620-0d54-4405-b046-a534c0ee1296
-                                Pole: ref!! da400342-21a5-4bb2-bff2-8711972423bd
-                            a999dcaf47e71d1da899f37849cf644b:
-                                Length: 2
-                                Root: CATRigRLegAnkle
-                                Target: ref!! 6fe8328d-9e2b-4b9a-9858-ea455c2a7ff8
-                                Pole: ref!! f6dbc5a1-91de-421e-9b48-3b3fb9dedc23
-        -   Folder: null
-            Entity:
-                Id: da400342-21a5-4bb2-bff2-8711972423bd
-                Name: leftArmHint
-                Components:
-                    ace2929231f62330e3ee71817b4b1ec3: !TransformComponent
-                        Id: 5fed2f79-871b-44fc-968a-c299873bfba5
-                        Position: {X: 0.5, Y: 1.0, Z: -1.0}
-                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 0.1, Y: 0.1, Z: 0.1}
-                        Children: {}
-                    2330ed4f164ebd549a976e224ca7931d: !ModelComponent
-                        Id: bed3358a-40ad-4d25-83a1-004242df9eec
-                        Model: 2425df37-2de5-41ea-8f19-a212ff523735:Sphere
-                        Materials: {}
+                        Right Foot:
+                            Root: CATRigRLegAnkle
+                            Pole: ref!! f6dbc5a1-91de-421e-9b48-3b3fb9dedc23
+                        Left Foot:
+                            Root: CATRigLLegAnkle
+                            Pole: ref!! 989fb5ae-4891-45d9-b2b2-2b1eba83a005
+                        Foot Spacing: 0.15
         -   Folder: null
             Entity:
                 Id: f6dbc5a1-91de-421e-9b48-3b3fb9dedc23
@@ -183,7 +197,7 @@ Hierarchy:
                 Components:
                     ace2929231f62330e3ee71817b4b1ec3: !TransformComponent
                         Id: 773747a6-9143-4752-8927-d9421f7ca20d
-                        Position: {X: -0.17103316, Y: 1.0989457, Z: 0.6877358}
+                        Position: {X: -0.2, Y: 1.0989457, Z: 0.6877358}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 0.1, Y: 0.1, Z: 0.1}
                         Children: {}
